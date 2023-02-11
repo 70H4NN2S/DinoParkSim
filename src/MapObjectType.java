@@ -1,0 +1,3 @@
+public enum MapObjectType {
+	GROUND, FENCE, BROKEN_FENCE, WATER, OUT_OF_BOUNDS, DINO
+}
