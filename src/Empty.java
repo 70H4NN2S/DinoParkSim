@@ -19,7 +19,7 @@ public class Empty implements MapObject
     @Override
     public String print()
 	{
-        return "     ";
+        return " ";
     }
 
 	/**

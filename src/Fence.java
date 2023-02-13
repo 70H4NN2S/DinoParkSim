@@ -19,7 +19,7 @@ public class Fence implements MapObject
 	 */
     @Override
     public String print() {
-        return COLOR_BLACK + "XXXXX";
+        return COLOR_BLACK + "X";
     }
 
 	/**

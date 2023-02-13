@@ -35,7 +35,7 @@ public class Carnivore extends Dino implements MapObject
     @Override
     public String print()
 	{
-        return COLOR_RED + "C:" + super.toString();
+        return COLOR_RED + super.toString();
     }
 
 	/**

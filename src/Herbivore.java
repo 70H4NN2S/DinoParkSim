@@ -32,7 +32,7 @@ public class Herbivore extends Dino implements MapObject
     @Override
     public String print()
 	{
-        return COLOR_GREEN + "H:" + super.toString();
+        return COLOR_GREEN + super.toString();
     }
 
 	/**

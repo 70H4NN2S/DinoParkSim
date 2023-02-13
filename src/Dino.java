@@ -65,6 +65,6 @@ public abstract class Dino
     @Override
     public String toString()
 	{
-        return SPECIES_NAME.substring(0,1) + ID + (ID < 10 ? " " : ""); // supports just up to 99 dinos
+        return SPECIES_NAME.substring(0,1);
     }
 }
