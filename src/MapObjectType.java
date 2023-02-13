@@ -1,3 +1,12 @@
-public enum MapObjectType {
-	GROUND, FENCE, BROKEN_FENCE, WATER, OUT_OF_BOUNDS, DINO
+/**
+ * This enum represents the different types of objects that can be on the map.
+ */
+public enum MapObjectType
+{
+    EMPTY,
+    FENCE,
+    HERBIVORE,
+    CARNIVORE,
+	WATER,
+	OUT_OF_BOUNDS // just used for error handling
 }

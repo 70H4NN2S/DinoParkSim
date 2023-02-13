@@ -1,6 +1,12 @@
 public class Water implements MapObject {
 	private final MapObjectType type = MapObjectType.WATER;
 	private final String COLOR_BLUE = "\u001B[34m";
+	private final String BACKGROUND_BLUE = "\u001B[44m";
+	private String wave;
+
+	public Water(int index) {
+		this.wave = (index % 2 == 0) ? "~" : "-";
+	}
 
 	@Override
 	public MapObjectType getType() {
@@ -9,7 +15,8 @@ public class Water implements MapObject {
 
 	@Override
 	public String print() {
-		return COLOR_BLUE + "W";
+		this.wave = (this.wave == "~") ? "-" : "~";
+		return this.COLOR_BLUE + this.BACKGROUND_BLUE + this.wave;
 	}
 
 	@Override
