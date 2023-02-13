@@ -107,7 +107,7 @@ public class Map
 	 */
     private void placeObstaclesRandomly()
 	{
-        int numFences = (int) (Settings.MAP_WIDTH * Settings.MAP_HEIGHT * Settings.INITIAL_FENCES_DENSITY / 100.0);
+        int numFences = (int) (Settings.MAP_WIDTH * Settings.MAP_HEIGHT * Settings.INITIAL_OBSTACLES_DENSITY / 100.0);
 
         for (int i = 0; i < numFences; i++)
 		{

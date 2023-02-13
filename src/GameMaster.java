@@ -3,10 +3,9 @@ import java.lang.Thread;
 
 public class GameMaster extends Thread
 {
-	private final static int MAP_SIZE = 20;
-	private static int NUM_HERBIVORES = 20;
-	private static int NUM_CARNIVORES = 5;
 	private static Map map = new Map();
+	private static int NUM_HERBIVORES = Settings.INITIAL_HERBIVORES_COUNT;
+	private static int NUM_CARNIVORES = Settings.INITIAL_CARNIVORES_COUNT;
 	private final static Random random = new Random();
 
 	//stats
@@ -39,7 +38,7 @@ public class GameMaster extends Thread
 			// slow down the game
 			try
 			{
-				Thread.sleep(1000); // 1000 milliseconds is one second.
+				Thread.sleep(Settings.UPDATE_DAY_SPEED);
 			}
 			catch (InterruptedException e)
 			{
@@ -55,9 +54,9 @@ public class GameMaster extends Thread
 	 */
 	private static void carnivoresEat()
 	{
-		for (int x = 0; x < MAP_SIZE; x++)
+		for (int x = 0; x < Settings.MAP_WIDTH; x++)
 		{
-			for (int y = 0; y < MAP_SIZE; y++)
+			for (int y = 0; y < Settings.MAP_HEIGHT; y++)
 			{
 				if (map.checkCoordinates(x, y) == MapObjectType.CARNIVORE)
 				{
@@ -106,9 +105,9 @@ public class GameMaster extends Thread
 	private static void moveDinos()
 	{
 		resetDinosMove();
-		for (int x = 0; x < MAP_SIZE; x++)
+		for (int x = 0; x < Settings.MAP_WIDTH; x++)
 		{
-			for (int y = 0; y < MAP_SIZE; y++)
+			for (int y = 0; y < Settings.MAP_HEIGHT; y++)
 			{
 				if (isDino(x, y))
 				{
@@ -126,9 +125,9 @@ public class GameMaster extends Thread
 	 */
 	private static void resetDinosMove()
 	{
-		for (int x = 0; x < MAP_SIZE; x++)
+		for (int x = 0; x < Settings.MAP_WIDTH; x++)
 		{
-			for (int y = 0; y < MAP_SIZE; y++)
+			for (int y = 0; y < Settings.MAP_HEIGHT; y++)
 			{
 				if (isDino(x, y))
 				{
@@ -208,7 +207,7 @@ public class GameMaster extends Thread
 	 */
 	private static boolean outOfBorder(int x, int y)
 	{
-		return x < 0 || x >= MAP_SIZE || y < 0 || y >= MAP_SIZE;
+		return x < 0 || x >= Settings.MAP_WIDTH || y < 0 || y >= Settings.MAP_HEIGHT;
 	}
 
 	/**
