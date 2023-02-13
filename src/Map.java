@@ -24,7 +24,7 @@ public class Map
 	{
         createDinos();
         placeDinosRandomly();
-        placeFencesRandomly();
+        placeObstaclesRandomly();
         fillMapWithEmpty();
     }
 
@@ -105,9 +105,9 @@ public class Map
 	/**
 	 * places fences randomly on the map.
 	 */
-    private void placeFencesRandomly()
+    private void placeObstaclesRandomly()
 	{
-        int numFences = (int) (Settings.MAP_WIDTH * Settings.MAP_HEIGHT * 0.1);
+        int numFences = (int) (Settings.MAP_WIDTH * Settings.MAP_HEIGHT * Settings.INITIAL_FENCES_DENSITY / 100.0);
 
         for (int i = 0; i < numFences; i++)
 		{
@@ -119,7 +119,7 @@ public class Map
                 x = random.nextInt(Settings.MAP_WIDTH);
                 y = random.nextInt(Settings.MAP_HEIGHT);
             }
-            map[y][x] = new Fence();
+            map[y][x] = new Obstacle();
         }
     }
 

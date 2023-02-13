@@ -4,7 +4,7 @@
 public enum MapObjectType
 {
     EMPTY,
-    FENCE,
+    OBSTACLE,
     HERBIVORE,
     CARNIVORE,
 	WATER,

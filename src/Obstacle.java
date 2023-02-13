@@ -1,4 +1,4 @@
-public class Fence implements MapObject
+public class Obstacle implements MapObject
 {
 	private final String COLOR_BLACK = "\u001B[30m"; // Black
 
@@ -9,7 +9,7 @@ public class Fence implements MapObject
 	 */
     @Override
     public MapObjectType getType() {
-        return MapObjectType.FENCE;
+        return MapObjectType.OBSTACLE;
     }
 
 	/**
