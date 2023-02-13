@@ -6,7 +6,7 @@ public class GameMaster extends Thread
 	private final static int MAP_SIZE = 20;
 	private static int NUM_HERBIVORES = 20;
 	private static int NUM_CARNIVORES = 5;
-	private static Map map = new Map(MAP_SIZE, NUM_HERBIVORES, NUM_CARNIVORES);
+	private static Map map = new Map();
 	private final static Random random = new Random();
 
 	//stats

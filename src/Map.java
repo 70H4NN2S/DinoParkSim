@@ -4,25 +4,15 @@ public class Map
 {
     private MapObject[][] map;
     private ArrayList<Dino> dinos;
-    private final int mapSize;
-    private final int numHerbivores;
-    private final int numCarnivores;
-    private final Random random = new Random();
 	private int[] amountDinoSpecies = {0,0,0,0,0,0}; // T-Rex, Velociraptor, Spinosaurus, Triceratops, Stegosaurus, Diplodocus
+	private final Random random = new Random();
 
 	/**
 	 * Creates a new map with the given size and number of dinos.
-	 *
-	 * @param mapSize		the size of the map
-	 * @param numHerbivores	the number of herbivores
-	 * @param numCarnivores	the number of carnivores
 	 */
-    public Map(int mapSize, int numHerbivores, int numCarnivores)
+    public Map()
 	{
-        this.mapSize = mapSize;
-        this.numHerbivores = numHerbivores;
-        this.numCarnivores = numCarnivores;
-        this.map = new MapObject[mapSize][mapSize];
+        this.map = new MapObject[Settings.MAP_HEIGHT][Settings.MAP_WIDTH];
         this.dinos = new ArrayList<>();
         createMap();
     }
@@ -36,7 +26,6 @@ public class Map
         placeDinosRandomly();
         placeFencesRandomly();
         fillMapWithEmpty();
-        testOutput();
     }
 
 	/**
@@ -49,14 +38,14 @@ public class Map
         String[] herbivoreNames = {"Triceratops", "Stegosaurus", "Diplodocus"};
 		String tmpName;
 
-        for (int i = 1; i <= numHerbivores; i++)
+        for (int i = 1; i <= Settings.INITIAL_HERBIVORES_COUNT; i++)
 		{
 			tmpName = herbivoreNames[random.nextInt(herbivoreNames.length)];
 			incrementAmountDinoSpecies(tmpName);
             dinos.add(new Herbivore(i, tmpName));
         }
 
-        for (int i = 1; i <= numCarnivores; i++)
+        for (int i = 1; i <= Settings.INITIAL_CARNIVORES_COUNT; i++)
 		{
 			tmpName = carnivoreNames[random.nextInt(carnivoreNames.length)];
 			incrementAmountDinoSpecies(tmpName);
@@ -101,15 +90,15 @@ public class Map
 	{
         for (Dino dino : dinos)
 		{
-            int x = random.nextInt(mapSize);
-            int y = random.nextInt(mapSize);
+            int x = random.nextInt(Settings.MAP_WIDTH);
+            int y = random.nextInt(Settings.MAP_HEIGHT);
 
-            while (map[x][y] != null)
+            while (map[y][x] != null)
 			{
-                x = random.nextInt(mapSize);
-                y = random.nextInt(mapSize);
+                x = random.nextInt(Settings.MAP_WIDTH);
+                y = random.nextInt(Settings.MAP_HEIGHT);
             }
-            map[x][y] = (MapObject) dino;
+            map[y][x] = (MapObject) dino;
         }
     }
 
@@ -118,19 +107,19 @@ public class Map
 	 */
     private void placeFencesRandomly()
 	{
-        int numFences = (int) (mapSize * mapSize * 0.1);
+        int numFences = (int) (Settings.MAP_WIDTH * Settings.MAP_HEIGHT * 0.1);
 
         for (int i = 0; i < numFences; i++)
 		{
-            int x = random.nextInt(mapSize);
-            int y = random.nextInt(mapSize);
+            int x = random.nextInt(Settings.MAP_WIDTH);
+            int y = random.nextInt(Settings.MAP_HEIGHT);
 
-            while (map[x][y] != null)
+            while (map[y][x] != null)
 			{
-                x = random.nextInt(mapSize);
-                y = random.nextInt(mapSize);
+                x = random.nextInt(Settings.MAP_WIDTH);
+                y = random.nextInt(Settings.MAP_HEIGHT);
             }
-            map[x][y] = new Fence();
+            map[y][x] = new Fence();
         }
     }
 
@@ -139,13 +128,13 @@ public class Map
 	 */
     private void fillMapWithEmpty()
     {
-        for (int x = 0; x < mapSize; x++)
+        for (int y = 0; y < Settings.MAP_HEIGHT; y++)
 		{
-            for (int y = 0; y < mapSize; y++)
+            for (int x = 0; x < Settings.MAP_WIDTH; x++)
 			{
-                if (map[x][y] == null)
+                if (map[y][x] == null)
 				{
-                    map[x][y] = new Empty();
+                    map[y][x] = new Empty();
                 }
             }
         }
@@ -160,11 +149,11 @@ public class Map
 	 */
 	public MapObjectType checkCoordinates(int x, int y)
 	{
-		if (x < 0 || x >= mapSize || y < 0 || y >= mapSize)
+		if (x < 0 || x >= Settings.MAP_WIDTH || y < 0 || y >= Settings.MAP_HEIGHT)
 		{
 			return MapObjectType.OUT_OF_BOUNDS;
 		}
-		return map[x][y].getType();
+		return map[y][x].getType();
 	}
 
 	/**
@@ -176,7 +165,7 @@ public class Map
 	 */
 	public MapObject getCoordinates(int x, int y)
 	{
-		return map[x][y];
+		return map[y][x];
 	}
 
 	/**
@@ -188,26 +177,8 @@ public class Map
 	 */
 	public void setCoordinates(int x, int y, MapObject mapObject)
 	{
-		map[x][y] = mapObject;
+		map[y][x] = mapObject;
 	}
-
-	/**
-	 * prints the starting map to the console.
-	 * usefull for debugging.
-	 * use toString() for everything else
-	 * @see #toString()
-	 */
-	public void testOutput()
-	{
-        for (int i = 0; i < mapSize; i++)
-		{
-            for (int j = 0; j < mapSize; j++)
-			{
-                System.out.print(map[i][j].print());
-            }
-            System.out.println();
-        }
-    }
 
 	/**
 	 * returns the map as a string.
@@ -217,11 +188,11 @@ public class Map
 	{
 		String output = "";
 
-		for (int x = 0; x < mapSize; x++)
+		for (int y = 0; y < Settings.MAP_HEIGHT; y++)
 		{
-			for (int y = 0; y < mapSize; y++)
+			for (int x = 0; x < Settings.MAP_WIDTH; x++)
 			{
-				output += map[x][y].print();
+				output += map[y][x].print();
 			}
 			output += "\n";
 		}
